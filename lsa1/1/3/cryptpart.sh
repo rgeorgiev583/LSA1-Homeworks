@@ -176,7 +176,8 @@ if [ -z "$1" ]; then
 	exit 1;
 fi
 
-# check if device is a storage drive or partition
+# if device is NOT a storage drive or partition (i.e. is NOT a valid one),
+#   print error message and exit with error code
 if [[ ! "$1" =~ \/dev\/sd ]]; then
 	echo "error: invalid drive or partition specified" > /dev/stderr
 	return 2;

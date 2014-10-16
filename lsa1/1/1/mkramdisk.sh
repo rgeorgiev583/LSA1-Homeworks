@@ -5,7 +5,7 @@
 #
 
 #
-# Command-line arguments:
+# Usage:
 #
 # mkramdisk [ -n <index> | -t <type> | -l <size> ] <name>
 #

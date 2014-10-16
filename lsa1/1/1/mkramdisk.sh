@@ -55,15 +55,21 @@ mkramdisk [ -n <index> | -t <type> | -l <size> | -h ] [ <name> ]
 	esac
 done
 
-if [ -z "$NUMBER" ]; then
+#
+# if ram device index is NOT specified as argument or the value specified is
+#   NOT valid (i.e. NOT a number), assign default value
+#
+if [ -z "$NUMBER" -o "$NUMBER" -ne "$NUMBER" ] > /dev/null; then
 	NUMBER=0
 fi
 
+# if filesystem type is NOT specified as argument, assign default value
 if [ -z "$TYPE" ]; then
 	TYPE="ext2"
 fi
 
-if [ -z "$SIZE" ]; then
+# if filesystem size is NOT specified as argument, assign default value
+if [ -z "$SIZE" -o "$SIZE" -ne "$SIZE" ]; then
 	SIZE=8192
 fi
 

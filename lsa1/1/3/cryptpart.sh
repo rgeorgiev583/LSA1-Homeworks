@@ -191,8 +191,7 @@ DEVICE="$1"
 #   and use it as device mapper name
 #
 if [ -z "$DEVMAPPER_NAME" ]; then
-	DEVICE_NAME="${DEVICE##*/}"
-	DEVMAPPER_NAME="/dev/mapper/$DEVICE_NAME"
+	DEVMAPPER_NAME="${DEVICE##*/}"
 fi
 
 if [ -z "$TYPE" ]; then

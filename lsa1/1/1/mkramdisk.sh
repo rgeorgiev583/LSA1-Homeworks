@@ -97,7 +97,7 @@ fi
 mkdir -p /mnt/$NAME
 mount /dev/ram$NUMBER /mnt/$NAME
 
-# output mount name
+# print mountpoint
 echo "/mnt/$NAME"
 
 # at this point user may check if the new filesystem is up and running by

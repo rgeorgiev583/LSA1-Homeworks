@@ -227,20 +227,20 @@ cryptsetup -s 512 -h sha512 -y luksFormat $DEVICE
 #cryptsetup luksDump $DEVICE
 
 # unlock encrypted device
-cryptsetup open --type luks $DEVICE $DEVMAPPER_NAME
+cryptsetup open --type luks $DEVICE /dev/mapper/$DEVMAPPER_NAME
 
 # create filesystem for encrypted device
-mkfs -t $TYPE $DEVMAPPER_NAME
+mkfs -t $TYPE /dev/mapper/$DEVMAPPER_NAME
 
 # mount said filesystem
-mount -t $TYPE $DEVMAPPER_NAME $MOUNTPOINT
+mount -t $TYPE /dev/mapper/$DEVMAPPER_NAME $MOUNTPOINT
 
 #
 # You can use the device now. To close it (unmount and lock it again), please
 #   execute the following commands:
 #
 #umount $MOUNTPOINT
-#cryptsetup close $DEVMAPPER_NAME
+#cryptsetup close /dev/mapper/$DEVMAPPER_NAME
 
 #
 # -- Part 3. System configuration --

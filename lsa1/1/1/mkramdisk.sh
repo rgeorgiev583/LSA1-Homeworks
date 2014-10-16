@@ -89,7 +89,7 @@ fi
 # create filesystem for ramdisk
 mkfs -t $TYPE -q /dev/ram$NUMBER $SIZE 
 
-# and mount said filesystem
+# and mount said filesystem (if it is not already mounted, of course)
 if [ -d /mnt/$NAME ]; then
 	echo "error: /mnt/$NAME already exists" > /dev/stderr
 	return 1

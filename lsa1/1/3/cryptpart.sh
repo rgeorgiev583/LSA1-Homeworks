@@ -194,10 +194,12 @@ if [ -z "$DEVMAPPER_NAME" ]; then
 	DEVMAPPER_NAME="${DEVICE##*/}"
 fi
 
+# if filesystem type is NOT specified as argument, assign default value
 if [ -z "$TYPE" ]; then
 	TYPE="ext4"
 fi
 
+# if mountpoint is NOT specified as argument, assign default value
 if [ -z "$MOUNTPOINT" ]; then
 	MOUNTPOINT="/mnt"
 fi
@@ -207,10 +209,10 @@ fi
 # create a temporary encrypted container
 cryptsetup open --type plain $DEVICE container
 
-# check for existence
+# check for existence of said container
 if ! fdisk -l; then
 	echo "error: could not create encrypted container" > /dev/stderr
-	return 3;
+	exit 3;
 fi
 
 # wipe with pseudorandom (encrypted data)

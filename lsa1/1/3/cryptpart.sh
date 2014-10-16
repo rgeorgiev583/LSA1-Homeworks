@@ -173,7 +173,7 @@ shift "$(($OPTIND - 1))"
 #   error code
 if [ -z "$1" ]; then
 	echo "error: no drive or partition specified" > /dev/stderr
-	return 1;
+	exit 1;
 fi
 
 # check if device is a storage drive or partition

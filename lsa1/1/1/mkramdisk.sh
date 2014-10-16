@@ -7,7 +7,7 @@
 #
 # Usage:
 #
-# mkramdisk [ -n <index> | -t <type> | -l <size> ] <name>
+# mkramdisk [ -n <index> | -t <type> | -l <size> | -h ] [ <name> ]
 #
 # <index>  - index of ram device, default: 0
 # <type>   - filesystem type

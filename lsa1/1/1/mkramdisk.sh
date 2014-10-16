@@ -23,23 +23,15 @@ OPTIND=1
 # retrieve command-line arguments one by one
 while getopts ":n:t:l:" opt; do
 	case "$opt" in
-		# if ram device index is specified
+		# ram device index
 		n)
-		    # if the value specified is valid (i.e. a number),
-			#   use this value
-			# and in the other case
-			#   use the default value
-			if [ "$OPTARG" -eq "$OPTARG" ] > /dev/null; then
-				NUMBER="$OPTARG"
-			else
-				NUMBER=0
-			fi
+			NUMBER="$OPTARG"
 			;;
-		# if filesystem type is specified
+		# filesystem type
 		t)
 			TYPE="$OPTARG"
 			;;
-		# if filesystem size is specified
+		# filesystem size
 		l)
 			if [ "$OPTARG" -eq "$OPTARG" ] > /dev/null; then
 				SIZE="$OPTARG"

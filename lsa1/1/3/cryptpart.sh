@@ -257,7 +257,7 @@ mount -t $TYPE /dev/mapper/$DEVMAPPER_NAME $MOUNTPOINT
 
 # skip all of the following steps if `-C' flag is raised
 if [ -n "$NO_CONFIG" ]; then
-	return 0	
+	exit 0
 fi
 
 #

@@ -9,10 +9,12 @@
 #
 # mkramdisk [ -n <index> | -t <type> | -l <size> | -h ] [ <name> ]
 #
-# <index>  - index of ram device, default: 0
-# <type>   - filesystem type
-# <size>   - filesystem size
-# <name>   - ramdisk mount name
+# -n <index>  - index of ram device, default: 0
+# -t <type>   - filesystem type, default: ext2
+# -l <size>   - filesystem size, default: 8192
+# -h          - print usage information and exit
+#
+# <name>      - ramdisk mount name
 #
 
 # reset getopts

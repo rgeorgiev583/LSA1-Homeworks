@@ -90,12 +90,46 @@
 #
 # -n <device-mapper name>   - name of device to map partition/drive to
 # -t <type>                 - device filesystem type
-# -m <mountpoint>           - name of directory where to mount the encrypted device
-# -B                        - do not configure bootloader (e.g. if not using GRUB)
-# -C                        - do not configure anything (if you do not want persistence)
-# <device>                  - name of drive or partition to encypt,
-#                             e.g. /dev/sda or /dev/sdb1
+# -m <mountpoint>           - name of directory where to mount the encrypted
+#                             device
+# -B                        - do not configure bootloader (e.g. if not using
+#                             GRUB)
+# -C                        - do not configure anything (if you do not want
+#                             persistence)
+# -h                        - print usage information and exit
 #
+# <device>                  - drive or partition to encypt, e.g. /dev/sda or
+#                             /dev/sdb1
+#
+
+# prints usage info
+function help {
+	echo 'Usage:
+
+cryptpart [ -n <device-mapper name> | -t <type> | -m <mountpoint> | -B | -C ]
+  <device>
+
+-n <device-mapper name>   - name of device to map partition/drive to
+-t <type>                 - device filesystem type
+-m <mountpoint>           - name of directory where to mount the encrypted
+                            device
+-B                        - do not configure bootloader (e.g. if not using
+                            GRUB)
+-C                        - do not configure anything (if you do not want
+                            persistence)
+-h                        - print usage information and exit
+
+<device>                  - drive or partition to encypt, e.g. /dev/sda or
+                            /dev/sdb1
+						 
+'
+}
+
+# if no arguments were passed, print usage info and exit
+if [ "$#" -eq 0 ]; then
+	help
+	exit 0
+fi
 
 # reset getopts
 OPTIND=1

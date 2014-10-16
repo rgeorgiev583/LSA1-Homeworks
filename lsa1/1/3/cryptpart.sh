@@ -180,7 +180,7 @@ fi
 #   print error message and exit with error code
 if [[ ! "$1" =~ \/dev\/sd ]]; then
 	echo "error: invalid drive or partition specified" > /dev/stderr
-	return 2;
+	exit 2;
 fi
 
 DEVICE="$1"

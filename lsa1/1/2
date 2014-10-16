@@ -1,0 +1,9 @@
+RAID device array:
+
+/dev/md -- directory, lists devices by name
+e.g. /dev/md/pv0
+
+/dev/mdX where X is a number (usu beginning from 127) -- device array, lists
+  devices by index
+e.g. /dev/md0
+

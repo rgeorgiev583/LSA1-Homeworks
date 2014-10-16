@@ -183,8 +183,13 @@ if [[ ! "$1" =~ \/dev\/sd ]]; then
 	exit 2;
 fi
 
+# the device specified is a valid one, so continue
 DEVICE="$1"
 
+# if device mapper name is NOT specified as argument,
+#   assign default value: get short device name from full device pathname
+#   and use it as device mapper name
+#
 if [ -z "$DEVMAPPER_NAME" ]; then
 	DEVICE_NAME="${DEVICE##*/}"
 	DEVMAPPER_NAME="/dev/mapper/$DEVICE_NAME"

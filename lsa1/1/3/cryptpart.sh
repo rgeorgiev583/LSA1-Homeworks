@@ -266,6 +266,8 @@ fi
 
 # append hooks to mkinitcpio config file
 sed 's/^\(HOOKS=".+\)"$/\1 encrypt keyboard"' -i /etc/mkinitcpio.conf
+
+# create initial ramdisk environment
 mkinitcpio -p linux
 
 #
@@ -273,17 +275,20 @@ mkinitcpio -p linux
 #
 
 # a kernel parameter which instructs the kernel that $DEVICE is encrypted
-#   and is mapped to $DEVMAPPER_NAME has to be passed at boot time
+#   and is mapped to /dev/mapper/$DEVMAPPER_NAME has to be passed at boot time
 # so therefore append said kernel parameter to the GRUB_CMDLINE_LINUX_DEFAULT
-#   line in /etc/default/grub to make it run persistently at every boot
+#   line in /etc/default/grub to make it mount persistently at every boot
 #
 
-# skip bootloader configuration part if `-B' flag is raised
+# configure bootloader only if `-B' flag is raised
 if [ -z "$NO_CONFIG_BOOTLDR" ]; then
-	# append kernel parameter to config file
-	sed 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".+\)"$/\1 cryptdevice=$DEVICE:$DEVMAPPER_NAME"/' -i /etc/default/grub
+	# append kernel parameter to GRUB default config file
+	sed 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=".+\)"$/\1 cryptdevice=$DEVICE:/dev/mapper/$DEVMAPPER_NAME"/' -i /etc/default/grub
 
-	# generate grub config file with new kernel parameter 
+	#
+	# generate actual grub config file which contains the newly added kernel
+	#   parameter
+	#
 	grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
@@ -293,12 +298,13 @@ fi
 
 #
 # get device UUID (this is a VERY UGLY hack but I couldn't find an another way
-# out)
+#   out)
 #
-DEVICE_UUID=$(blkid | grep $DEVICE | sed 's/.*UUID="\([0-9a-f-]\+\)".*/\1/')
+DEVICE_UUID=$( blkid | grep $DEVICE | sed 's/.*UUID="\([0-9a-f-]\+\)".*/\1/' )
 
-# add encrypted device to /etc/crypttab
-echo -e "$DEVICE_NAME\tUUID=$DEVICE_UUID\tnone\tluks,timeout=180" >> /etc/crypttab
+# append encrypted device to /etc/crypttab
+echo -e "$DEVMAPPER_NAME\tUUID=$DEVICE_UUID\tnone\tluks,timeout=180" >> /etc/crypttab
 
-# add encrypted device to /etc/fstab
-echo -e "$DEVMAPPER_NAME\t$MOUNTPOINT\text4\tdefaults,errors=remount-ro\t0\t2" >> /etc/fstab
+# append encrypted device to /etc/fstab
+echo -e "/dev/mapper/$DEVMAPPER_NAME\t$MOUNTPOINT\text4\tdefaults,errors=remount-ro\t0\t2" >> /etc/fstab
+

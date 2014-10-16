@@ -33,11 +33,24 @@ while getopts ":n:t:l:" opt; do
 			;;
 		# filesystem size
 		l)
-			if [ "$OPTARG" -eq "$OPTARG" ] > /dev/null; then
-				SIZE="$OPTARG"
-			else
-				SIZE=8192
-			fi
+			SIZE="$OPTARG"
+			;;
+		# help
+		h)
+			# print usage info and exit
+			echo 'Usage:
+
+mkramdisk [ -n <index> | -t <type> | -l <size> | -h ] [ <name> ]
+
+-n <index>  - index of ram device, default: 0
+-t <type>   - filesystem type, default: ext2
+-l <size>   - filesystem size, default: 8192
+-h          - print usage information and exit
+
+<name>      - ramdisk mount name
+
+'
+			exit 0
 			;;
 	esac
 done

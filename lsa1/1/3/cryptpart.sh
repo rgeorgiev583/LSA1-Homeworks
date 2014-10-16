@@ -137,23 +137,31 @@ OPTIND=1
 # retrieve command-line arguments one by one
 while getopts ":n:" opt; do
 	case "$opt" in
-		# if device mapper name is specified
+		# device mapper name
 		n)
 			DEVMAPPER_NAME="$OPTARG"
 			;;
-		# if filesystem type is specified
+		# filesystem type
 		t)
 			TYPE="$OPTARG"
 			;;
-		# if mountpoint is specified
+		# mountpoint
 		m)
 			MOUNTPOINT="$OPTARG"
 			;;
+		# disable bootloader configuration
 		B)
 			NO_CONFIG_BOOTLDR='1'
 			;;
+		# disable any configuration
 		C)
 			NO_CONFIG='1'
+			;;
+		# help
+		h)
+			# print usage info and exit
+			help
+			exit 0
 			;;
 	esac
 done

@@ -245,17 +245,17 @@ mount -t $TYPE /dev/mapper/$DEVMAPPER_NAME $MOUNTPOINT
 #
 # -- Part 3. System configuration --
 #
-# WARNING: The following code will only work with GRUB-based systems.  If you
-#   use another bootloader, you have to do the following part yourself
-#   (and you will also have to run this script with the `-b' parameter
-#   enabled.)
+# WARNING: The following code will work only with GRUB-based systems.
+#   If you use another bootloader, you will have to perform these tasks
+#   manually (and you will also have to run this script with the `-b'
+#   parameter.)
 # WARNING #2: This script also assumes that you have a separate /boot
-#   partition mounted where GRUB is located.
-# WARNING #3: The following WON'T work with GRUB legacy.  Please update your
-#   system instead. :-)
+#   partition mounted in which GRUB is located.
+# WARNING #3: The following WON'T work with GRUB legacy.  Please upgrade your
+#   bootloader instead. :-)
 #
 
-# skip the following steps if `-C' flag is raised
+# skip all of the following steps if `-C' flag is raised
 if [ -n "$NO_CONFIG" ]; then
 	return 0	
 fi

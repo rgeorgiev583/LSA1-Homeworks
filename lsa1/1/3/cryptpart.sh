@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #
-# cryptpart -- encrypt Linux drive partition using dm-crypt with LUKS
+# cryptpart -- encrypt Linux drive or partition using dm-crypt with LUKS
 #
 
 #
 # Requirements:
 #
-# * Linux with dm-crypt (obviously)
+# * Linux with dm-crypt support (obviously)
 # * GRUB installed and set up as default bootloader
 # * mkinitcpio -- for creating the new initial ramdisk environment
 #
@@ -83,9 +83,10 @@
 #
 
 #
-# Command-line arguments:
+# Usage:
 #
-# cryptpart [ -n <device-mapper name> | -t <type> | -m <mountpoint> | -B | -C ] <device>
+# cryptpart [ -n <device-mapper name> | -t <type> | -m <mountpoint> | -B | -C ]
+#   <device>
 #
 # -n <device-mapper name>   - name of device to map partition/drive to
 # -t <type>                 - device filesystem type

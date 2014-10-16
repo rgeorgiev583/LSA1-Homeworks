@@ -92,7 +92,7 @@ mkfs -t $TYPE -q /dev/ram$NUMBER $SIZE
 # and mount said filesystem (if it is not already mounted, of course)
 if [ -d /mnt/$NAME ]; then
 	echo "error: /mnt/$NAME already exists" > /dev/stderr
-	return 1
+	exit 1
 fi
 mkdir -p /mnt/$NAME
 mount /dev/ram$NUMBER /mnt/$NAME

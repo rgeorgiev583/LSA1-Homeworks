@@ -169,7 +169,8 @@ done
 # trim non-positional arguments in order to read the positional ones
 shift "$(($OPTIND - 1))"
 
-# check if drive or partition is specified as argument
+# if device is NOT specified as argument, print error message and exit with
+#   error code
 if [ -z "$1" ]; then
 	echo "error: no drive or partition specified" > /dev/stderr
 	return 1;
